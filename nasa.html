@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MINI NASA APP</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+`
+	<header>
+		<h1>NASA MINI APP</h1>
+	</header>
+
+	<h1>IMAGE OF THE DAY</h1>
+	<img id ="image" width="100%">
+	<p id="copyright"></p>
+	<h3 id="title"></h3>
+	<p id="description"></p>
+
+<script type="text/javascript">
+//call nasa api
+$.ajax({
+	url:"https://api.nasa.gov/planetary/apod?api_key=K1f5aT0BTgJNYuUEUvLqNifSZfW8paOX7ZcQAGen",
+		
+		success: function(information){
+			
+			if(information.media_type == "image") { 
+	   			$("#image").attr("src", information.url); }
+	   		if("copyright" in information) {
+			    $("#copyright").text("By " + information.copyright);
+			  }
+			  else {
+			    $("#copyright").text("By " + "Public Domain");
+			  }
+			document.getElementById("title").innerHTML = information.title;
+			document.getElementById("description").innerHTML = information.explanation;
+	}
+
+}); 
+</script>
+
+</body>
+</html>
